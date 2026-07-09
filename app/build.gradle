@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.angeltoms.repacker"
+        minSdkVersion 21
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled false
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11 -frtti -fexceptions"
+                cFlags ""
+                arguments "-DANDROID_STL=stlport_static"
+            }
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
+        }
+    }
+    buildTypes {
+        release {
+            // 启用代码裁剪与混淆（自动移除未被引用的第三方库和代码）
+            minifyEnabled true
+
+            // 启用资源裁剪（自动移除未被引用的多余图片、XML 等资源）
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    sourceSets.main {
+        jniLibs.srcDirs = ['libs']
+        jni.srcDirs = []
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+    buildToolsVersion '26.0.2'
+    productFlavors {
+    }
+
+    splits {
+        density { enable false }
+        abi { enable false }
+    }
+}
+
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:27.1.1'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
