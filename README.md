@@ -5,6 +5,13 @@
 	
 ### 项目介绍
 	项目比较简单，代码是基于很早以前代码稍微改造的，比较容易看懂，这里就不做详细描述了
+
+### 相关链接
+> [ApktoolReapcker](https://github.com/ylcangel/ApktoolRepacker)
+>
+> [repacker](https://github.com/ylcangel/repacker)
+>
+> [RepackerHook](https://github.com/ylcangel/RepackerHook)
 	
 ### 关于作者
 
